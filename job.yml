@@ -1,0 +1,96 @@
+resources:
+  jobs:
+    Job_Case:
+      name: Job Case
+      schedule:
+        quartz_cron_expression: 41 0 3 * * ?
+        timezone_id: America/Sao_Paulo
+        pause_status: UNPAUSED
+      tasks:
+        - task_key: 01_Bronze
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/01_Bronze
+            source: WORKSPACE
+        - task_key: Silver_chamados
+          depends_on:
+            - task_key: 01_Bronze
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Silver_chamados
+            source: WORKSPACE
+        - task_key: Silver_chamados_hora_canais
+          depends_on:
+            - task_key: Silver_chamados
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Silver_chamados_hora_canais
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: Silver_custos_atendentes
+          depends_on:
+            - task_key: Silver_chamados_hora_canais
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Silver_custos_atendentes
+            source: WORKSPACE
+        - task_key: Silver_pesquisa_satisfacao
+          depends_on:
+            - task_key: Silver_custos_atendentes
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Silver_pesquisa_satisfacao
+            source: WORKSPACE
+        - task_key: Silver_clientes
+          depends_on:
+            - task_key: Silver_pesquisa_satisfacao
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Silver_clientes
+            source: WORKSPACE
+        - task_key: Silver_motivos
+          depends_on:
+            - task_key: Silver_clientes
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Silver_motivos
+            source: WORKSPACE
+        - task_key: Gold_ft_chamados_v2
+          depends_on:
+            - task_key: Silver_motivos
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Gold_ft_chamados_v2
+            source: WORKSPACE
+        - task_key: Gold_kpi_csat_qualidade
+          depends_on:
+            - task_key: Gold_ft_chamados_v2
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Gold_kpi_csat_qualidade
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: Gold_kpi_motivos_clientes
+          depends_on:
+            - task_key: Gold_kpi_csat_qualidade
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Gold_kpi_motivos_clientes
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: Gold_kpi_demanda_horaria
+          depends_on:
+            - task_key: Gold_kpi_motivos_clientes
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Gold_kpi_demanda_horaria
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: Gold_kpi_mensal
+          depends_on:
+            - task_key: Gold_kpi_demanda_horaria
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Gold_kpi_mensal
+            source: WORKSPACE
+        - task_key: Gold_kpi_custos_produtividade
+          depends_on:
+            - task_key: Gold_kpi_mensal
+          notebook_task:
+            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Gold_kpi_custos_produtividade
+            source: WORKSPACE
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "6"
+      performance_target: PERFORMANCE_OPTIMIZED
