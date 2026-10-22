@@ -9,84 +9,88 @@ resources:
       tasks:
         - task_key: 01_Bronze
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/01_Bronze
-            source: WORKSPACE
+            notebook_path: 01_Bronze
+            source: GIT
         - task_key: Silver_chamados
           depends_on:
             - task_key: 01_Bronze
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Silver_chamados
-            source: WORKSPACE
+            notebook_path: Silver_chamados
+            source: GIT
         - task_key: Silver_chamados_hora_canais
           depends_on:
             - task_key: Silver_chamados
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Silver_chamados_hora_canais
-            source: WORKSPACE
+            notebook_path: Silver_chamados_hora_canais
+            source: GIT
           environment_key: Default
         - task_key: Silver_custos_atendentes
           depends_on:
             - task_key: Silver_chamados_hora_canais
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Silver_custos_atendentes
-            source: WORKSPACE
+            notebook_path: Silver_custos_atendentes
+            source: GIT
         - task_key: Silver_pesquisa_satisfacao
           depends_on:
             - task_key: Silver_custos_atendentes
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Silver_pesquisa_satisfacao
-            source: WORKSPACE
+            notebook_path: Silver_pesquisa_satisfacao
+            source: GIT
         - task_key: Silver_clientes
           depends_on:
             - task_key: Silver_pesquisa_satisfacao
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Silver_clientes
-            source: WORKSPACE
+            notebook_path: Silver_clientes
+            source: GIT
         - task_key: Silver_motivos
           depends_on:
             - task_key: Silver_clientes
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Silver_motivos
-            source: WORKSPACE
+            notebook_path: Silver_motivos
+            source: GIT
         - task_key: Gold_ft_chamados_v2
           depends_on:
             - task_key: Silver_motivos
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Gold_ft_chamados_v2
-            source: WORKSPACE
+            notebook_path: Gold_ft_chamados_v2
+            source: GIT
         - task_key: Gold_kpi_csat_qualidade
           depends_on:
             - task_key: Gold_ft_chamados_v2
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Gold_kpi_csat_qualidade
-            source: WORKSPACE
+            notebook_path: Gold_kpi_csat_qualidade
+            source: GIT
           environment_key: Default
         - task_key: Gold_kpi_motivos_clientes
           depends_on:
             - task_key: Gold_kpi_csat_qualidade
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Gold_kpi_motivos_clientes
-            source: WORKSPACE
+            notebook_path: Gold_kpi_motivos_clientes
+            source: GIT
           environment_key: Default
         - task_key: Gold_kpi_demanda_horaria
           depends_on:
             - task_key: Gold_kpi_motivos_clientes
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Gold_kpi_demanda_horaria
-            source: WORKSPACE
+            notebook_path: Gold_kpi_demanda_horaria
+            source: GIT
           environment_key: Default
         - task_key: Gold_kpi_mensal
           depends_on:
             - task_key: Gold_kpi_demanda_horaria
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Gold_kpi_mensal
-            source: WORKSPACE
+            notebook_path: Gold_kpi_mensal
+            source: GIT
         - task_key: Gold_kpi_custos_produtividade
           depends_on:
             - task_key: Gold_kpi_mensal
           notebook_task:
-            notebook_path: /Workspace/Users/leonanlouvem@proton.me/Repos/Case_Rocket_Lab/Gold_kpi_custos_produtividade
-            source: WORKSPACE
+            notebook_path: Gold_kpi_custos_produtividade
+            source: GIT
+      git_source:
+        git_url: https://github.com/leonanmaster/Case_Rocket_Lab
+        git_provider: gitHub
+        git_branch: main
       queue:
         enabled: true
       environments:
